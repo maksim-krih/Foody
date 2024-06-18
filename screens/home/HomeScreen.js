@@ -21,13 +21,50 @@ export default function HomeScreen() {
     }
 
     loadFacilities();
-  }, [])
+  }, []);
 
+  const filters = [
+    {
+      label: "All"
+    },
+    {
+      label: "Restaurants"
+    },
+    {
+      label: "Cafe"
+    },
+    {
+      label: "Hookah"
+    },
+    {
+      label: "For children"
+    },
+    {
+      label: "Street food"
+    },
+  ];
+
+  const additionalFilters = [
+    {
+      label: "View all"
+    },
+    {
+      label: "Trending now"
+    },
+  ]
+
+  /*
+  TODO: 
+    # Split and move to separate components
+    # Remove inline styles and remove dublications in styles
+    # Separate ui from logic
+    # Logic for filters
+  */
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={"#04B193"} />
       <StyledToolbar />
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filter}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filter}> 
         <Text
           style={{
             color: "#8D8D8D",
@@ -36,13 +73,10 @@ export default function HomeScreen() {
           }}
         >
           Map:
-            </Text>
-        <Button text="All" raised primary style={{ container: { backgroundColor: '#FF8A80', marginHorizontal: 5, borderRadius: 20 } }} />
-        <Button text="Restaurants" raised primary style={{ container: { backgroundColor: '#FFC830', marginHorizontal: 5, borderRadius: 20 } }} />
-        <Button text="Cafe" raised primary style={{ container: { backgroundColor: '#FFC830', marginHorizontal: 5, borderRadius: 20 } }} />
-        <Button text="Hookah" raised primary style={{ container: { backgroundColor: '#FFC830', marginHorizontal: 5, borderRadius: 20 } }} />
-        <Button text="For children" raised primary style={{ container: { backgroundColor: '#FFC830', marginHorizontal: 5, borderRadius: 20 } }} />
-        <Button text="Street food" raised primary style={{ container: { backgroundColor: '#FFC830', marginHorizontal: 5, borderRadius: 20 } }} />
+        </Text>
+        {filters.map(x => (
+          <Button text={x.label} raised primary style={{ container: { backgroundColor: '#FF8A80', marginHorizontal: 5, borderRadius: 20 } }} />
+        ))}
       </ScrollView>
       <View style={styles.mapcontainer}>
         <MapView
@@ -56,164 +90,45 @@ export default function HomeScreen() {
           }}
         />
       </View>
-      <Text
-        style={{
-          color: "#8D8D8D",
-          fontSize: 15,
-          fontWeight: "bold",
-          textAlign: "right",
-          marginHorizontal: 20
-        }}
-      >
-        view all
-          </Text>
-      <Text
-        style={{
-          color: "#8D8D8D",
-          fontSize: 18,
-          fontWeight: "bold",
-          marginHorizontal: 20
-        }}
-      >
-        Trending now
-          </Text>
+      {additionalFilters.map(x => (
+        <Text
+          style={{
+            color: "#8D8D8D",
+            fontSize: 15,
+            fontWeight: "bold",
+            textAlign: "right",
+            marginHorizontal: 20
+         }}
+        >
+         {x.label}
+        </Text>
+      ))}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginVertical: 10 }}>
         <View style={{ marginHorizontal: 12.5, display: "flex", flexDirection: "row" }}>
-          <Card
-            style={{
-              container: {
+          {facilities.map(x => 
+            <Card style={{
+             container: {
                 height: 130,
-                backgroundColor: "#FDCB46",
-                width: 100,
+                backgroundColor: "#E5E2DD",
+                width: 165,
                 borderRadius: 15
               }
-            }}
-            onPress={null}
-          >
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              THIRD COFFEE WAVE
+            }}>
+              <Text
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  textAlign: "center",
+                  textAlignVertical: "center",
+                  color: "#17AA90",
+                  fontWeight: "bold",
+                  fontSize: 30
+                }}
+              >
+                {x.name}
               </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#17AA90",
-              width: 100,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              {"ITALIAN & TASTY"}
-            </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#F58E87",
-              width: 100,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              MEGA BURGERS
-              </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#FDCB46",
-              width: 100,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              THIRD COFFEE WAVE
-              </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#17AA90",
-              width: 100,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              BACK TO MIAMI
-              </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#F58E87",
-              width: 100,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              YOUR LAST CHANCE
-              </Text>
-          </Card>
+            </Card>
+          )} 
         </View>
       </ScrollView>
       <Text
@@ -228,94 +143,30 @@ export default function HomeScreen() {
       </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginVertical: 10 }}>
         <View style={{ marginHorizontal: 12.5, display: "flex", flexDirection: "row" }}>
-          {facilities.map(x => <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#17AA90",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              {x.name}
-            </Text>
-          </Card>)}
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#17AA90",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              36 PO
+          {facilities.map(x => 
+            <Card style={{
+             container: {
+                height: 130,
+                backgroundColor: "#E5E2DD",
+                width: 165,
+                borderRadius: 15
+              }
+            }}>
+              <Text
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  textAlign: "center",
+                  textAlignVertical: "center",
+                  color: "#17AA90",
+                  fontWeight: "bold",
+                  fontSize: 30
+                }}
+              >
+                {x.name}
               </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#595553",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              GAS LAMP
-              </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#F58E87",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              HASHTAG
-              </Text>
-          </Card>
+            </Card>
+          )} 
         </View>
       </ScrollView>
       <Text
@@ -327,75 +178,33 @@ export default function HomeScreen() {
         }}
       >
         New ones
-          </Text>
+      </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginVertical: 10 }}>
         <View style={{ marginHorizontal: 12.5, display: "flex", flexDirection: "row" }}>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#F58E87",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              Tante
+          {facilities.map(x => 
+            <Card style={{
+             container: {
+                height: 130,
+                backgroundColor: "#E5E2DD",
+                width: 165,
+                borderRadius: 15
+              }
+            }}>
+              <Text
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  textAlign: "center",
+                  textAlignVertical: "center",
+                  color: "#17AA90",
+                  fontWeight: "bold",
+                  fontSize: 30
+                }}
+              >
+                {x.name}
               </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#17AA90",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              SDV
-              </Text>
-          </Card>
-          <Card style={{
-            container: {
-              height: 130,
-              backgroundColor: "#E5E2DD",
-              width: 165,
-              borderRadius: 15
-            }
-          }}>
-            <Text
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                textAlignVertical: "center",
-                color: "#595553",
-                fontWeight: "bold",
-                fontSize: 30
-              }}
-            >
-              Tarilka
-              </Text>
-          </Card>
+            </Card>
+          )} 
         </View>
       </ScrollView>
       <Text
@@ -408,7 +217,7 @@ export default function HomeScreen() {
         }}
       >
         2020. All rights are reserved
-          </Text>
+      </Text>
     </ScrollView>
   );
 }
